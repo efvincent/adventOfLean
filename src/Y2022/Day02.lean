@@ -63,12 +63,12 @@ namespace Internal
 end Internal
 open Internal
 
-def ans1 := do
+def ans₁ := do
   let s <- getPuz 22 2
   return decode s |> matchResult (rule p2ToMove)
 
-def ans2 := do
+def ans₂ := do
   let s <- getPuz 22 2 
   return decode s |> matchResult (rule p2ToMove₂)
 
-#eval ans2
+#eval ans₂

@@ -83,5 +83,3 @@ def intersect {α : Type} [BEq α] (xs : List (List α)) : List α :=
     loop : List α -> List (List α) -> List α  
       | acc, [] => acc
       | acc, h' :: t => loop (intr acc h') t
-
-def List.sum := List.foldl (· + ·) 0

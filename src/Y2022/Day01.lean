@@ -1,4 +1,4 @@
-import Mathlib.Data.List.Sort
+import Mathlib
 import Lib.Util
 
 open List (nil cons head map foldl maximum?)
