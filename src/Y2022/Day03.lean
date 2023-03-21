@@ -1,4 +1,4 @@
-import Std.Data.List.Basic
+import Mathlib
 import Lib.Util
 
 open List (toChunks splitAt head! map sum)
