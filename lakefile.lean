@@ -18,4 +18,6 @@ lean_exe «Main» {
   root := "Main"
 }
 
+meta if get_config? doc = some "on" then
+require «doc-gen4» from git "https://github.com/leanprover/doc-gen4" @ "main"
 
