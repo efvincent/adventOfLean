@@ -1,28 +1,39 @@
 import Mathlib
 import Lib.Util
 
-open List (nil cons head map foldl maximum?)
+open List (nil cons head map foldl maximum? mergeSort take)
 open Add (add)
 open ToString (toString)
 
 namespace Internal
 
-private def decode (s:String) : List Nat :=
-  map (foldl add 0 ∘ map strToNat)
-  ∘ split (split s.data '\n') <| [] 
+def decode (input : String) : List Nat :=
+  input.splitOn "\n\n"
+  |> map (λs  => s.splitOn "\n")
+  |> map (λss => ss.map (λs => s.toNat!))
+  |> map (λns => ns.foldl (· + ·) 0)
+  |> mergeSort (· > ·) 
 
+-- break a string into a list of strings separated by 2 newline characters,
+-- then for each string, break it into a list of strings separated by a newline character
+-- then for each string, parse into a Nat, then sum each group of Nats and return the maximum
+def part1 (input : String) : Nat :=
+  decode input
+  |> maximum? 
+  |> Option.get!
+
+-- same as part1, but instead sum the three largest sums of each group
+def part2 (input : String) : Nat :=
+  decode input
+  |> take 3 
+  |> foldl (· + ·) 0
+  
 end Internal
-open Internal
 
--- Answer to part 1
-def ans1 := do
+#eval do
   let s <- getPuz 22 1
-  decode s
-  |> maximum?
-  |> pure
+  pure $ Internal.part1 s
 
-def ans2 := do
+#eval do
   let s <- getPuz 22 1
-  let s₁ := decode s
-  let s₂ := List.mergeSort (λm n : Nat => n <= m) s₁
-  pure <| List.take 3 s₂ |> List.sum
+  pure $ Internal.part2 s
