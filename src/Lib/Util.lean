@@ -37,8 +37,8 @@ def lines : String -> List String
 
 /-- convert a list of chars to a natural. Does not check that the chars are
     digits, it simply performs the conversion without possibility of error. -/
-def strToNat (cs : List Char) : Nat :=
-  loop (List.reverse cs)
+def strToNat (cs : String) : Nat :=
+  loop (List.reverse cs.data)
   where
     loop : List Char -> Nat
     | [] => 0
